@@ -23,3 +23,16 @@ export const createPosts= async (req, res)=>{
         res.status(409).send("failed");
     }
 }
+
+export const updatePost = async (req, res)=>{
+    const {id:_id} = req.params;
+    const post=req.body;
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with this id");
+
+    try{
+        const updatedPost=await PostMessage.findByIdAndUpdate(_id, post, {new:true})
+        res.status(200).json(updatedPost);
+    }catch(err){
+        res.status(400).send('unable to update post')
+    }
+}

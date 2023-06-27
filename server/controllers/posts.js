@@ -36,3 +36,16 @@ export const updatePost = async (req, res)=>{
         res.status(400).send('unable to update post')
     }
 }
+
+export const deletePost = async(req, res) => {
+    const {id:_id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(400).send("No post with this Id");
+
+    try {
+        await PostMessage.findByIdAndDelete(_id);
+        return res.status(204).json({message: "Post deleted successfully"});
+    } catch (error) {
+        return res.status(400).json({'msg': "unable to delete post"})
+    }
+}

@@ -49,3 +49,18 @@ export const deletePost = async(req, res) => {
         return res.status(400).json({'msg': "unable to delete post"})
     }
 }
+
+export const likePost = async (req, res)=>{
+    const {id:_id} = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(400).send("no such post ");
+
+    try {
+        const post = await PostMessage.findById(_id);
+        const updatedPost = await PostMessage.findByIdAndUpdate(_id, {likeCount: post.likeCount+1}, {new: true}); 
+        return res.status(200).json(updatedPost);
+
+    } catch (error) {
+        return res.status(400).json({"msg": "unable to update like count"})
+    }
+}

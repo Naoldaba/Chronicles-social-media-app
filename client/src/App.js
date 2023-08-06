@@ -1,46 +1,20 @@
-import {Container, AppBar, Typography, Grow, Grid} from '@mui/material';
-import aau from './images/aau.png';
-import Posts from './components/Posts/posts'; 
-import Form from './components/Form/form';
-import {useDispatch} from 'react-redux';
-
-import {getPosts} from './actions/posts';
-
-import { StyledAppBar, Image, MainContainer } from './styles';
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {Container} from '@mui/material';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/home';
+import Auth from './components/Auth/Auth';
 
 function App() {
-  const [currId, setCurrId] = useState(null);
-
-  const dispatch = useDispatch();
-
-  useEffect(()=>{
-    dispatch(getPosts());
-    console.log(currId);
-  }, [currId])
-  
   return (
-    <Container maxWidth='lg'>
-
-      <StyledAppBar position='static' color="secondary">
-        <Typography variant='h2' align='center' color={{color: 'white'}}>Chronicles of AAU</Typography>
-        <Image src={aau} alt="chronicles of aau" height='60' />
-      </StyledAppBar>
-
-      <Grow in>
-        <Container>
-          <MainContainer container justify='space-between' alignItems='stretch' spacing={3}>
-            <Grid item xs={12} sm={7} >
-              <Posts setCurrId={setCurrId} />
-            </Grid>
-            <Grid item xs={12} sm={4} >
-              <Form currId={currId} setCurrId={setCurrId} />
-            </Grid>
-          </MainContainer>
+    <BrowserRouter>
+        <Container maxWidth='lg'>
+          <Navbar/>
+          <Routes>
+            <Route path='/' exact Component={Home}/>
+            <Route path='/auth' Component={Auth}/>
+          </Routes>
         </Container>
-      </Grow>
-
-    </Container>
+    </BrowserRouter>
   );
 }
 

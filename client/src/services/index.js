@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url='http://localhost:5000/posts';
+const url='https://chronicles-backend-orcin.vercel.app';
 
 export const fetchPosts = () => axios.get(url);
 export const makePost = (newPost) => axios.post(url, newPost);

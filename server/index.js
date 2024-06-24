@@ -7,7 +7,13 @@ import dotenv from 'dotenv';
 const app=express();
 dotenv.config();
 
-app.use(cors());
+app.use(cors(
+        {
+           origin: 'https://chronicles-mu.vercel.app/', 
+           methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+           credentials: true, 
+        }
+));
 app.use(express.json({limit: "30mb", extended:true}));
 app.use(express.urlencoded({limit: "30mb", extended:true}));
 

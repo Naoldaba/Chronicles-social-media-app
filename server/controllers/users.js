@@ -19,7 +19,6 @@ export const signin= async (req, res) => {
     }
 }
 
-
 export const signup = async (req, res)=>{
     try {
         const {firstName, lastName, email, password, confirmPassword} = req.body;

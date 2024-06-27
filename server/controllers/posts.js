@@ -3,7 +3,6 @@ import PostMessage from "../models/postMessage.js";
 
 export const getPosts=async (req, res)=>{
     try{    
-
         const postMessages = await PostMessage.find();
         res.status(200).json(postMessages);
     }catch(error){
@@ -13,10 +12,9 @@ export const getPosts=async (req, res)=>{
 
 export const createPosts= async (req, res)=>{
     const post = req.body;
-    const newPost = new PostMessage(post);
 
     try{
-        await newPost.save();
+        const newPost = await PostMessage.create({...post, creator: req.userId})
         res.status(201).json(newPost);
 
     } catch(e){
@@ -50,17 +48,32 @@ export const deletePost = async(req, res) => {
     }
 }
 
-export const likePost = async (req, res)=>{
-    const {id:_id} = req.params;
+export const likePost = async (req, res) => {
+    const { id: _id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(_id)) return res.status(400).send("no such post ");
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(400).send("No such post");
+    }
 
     try {
         const post = await PostMessage.findById(_id);
-        const updatedPost = await PostMessage.findByIdAndUpdate(_id, {likeCount: post.likeCount+1}, {new: true}); 
-        return res.status(200).json(updatedPost);
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
 
+        const index = post.likes.findIndex((id) => id === req.userId);
+
+        if (index === -1) {
+            post.likes.push(req.userId);
+        } else {
+            post.likes = post.likes.filter((id) => id !== req.userId);
+        }
+
+        const updatedPost = await PostMessage.findByIdAndUpdate(_id, { likes: post.likes }, { new: true });
+        
+        return res.status(200).json(updatedPost);
     } catch (error) {
-        return res.status(400).json({"msg": "unable to update like count"})
+        console.error("Error updating like count:", error); 
+        return res.status(500).json({ msg: "Unable to update like count" });
     }
-}
+};

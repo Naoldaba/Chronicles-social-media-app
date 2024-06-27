@@ -6,12 +6,9 @@ const auth = async (req, res, next)=>{
         const isCustomToken = token.length < 500;
         let payload;
         if (token && isCustomToken){
-            console.log('hi')
-            payload = jwt.verify(token, 'test');
-            console.log('payload', payload)
+            payload = jwt.verify(token, process.env.SECRET_KEY);
 
             req.userId = payload?.id;
-            console.log('req.userId', req.userId);
         }else {
             payload = jwt.decode(token);
             req.userId = payload?.sub

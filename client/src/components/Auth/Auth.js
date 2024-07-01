@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';
 import LockOutlined from '@mui/icons-material/LockOutlined';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 import {
   Submit,
   StyledGrid,
@@ -53,8 +54,10 @@ const Auth = () => {
   };
 
   const handleGoogleSuccess = async (response) => {
-    const profileInfo = response.profileObj;
+    console.log("response",response)
     const token = response.credential;
+    const profileInfo = jwtDecode(response.credential)
+    console.log("decoded", profileInfo);
     try {
       dispatch(AUTH({ profileInfo, token }));
       navigate('/');
@@ -70,7 +73,6 @@ const Auth = () => {
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
 
   return (
-    <GoogleOAuthProvider clientId="745121366812-2mthhe0lppgksip38fqu9ikm7meecf7g.apps.googleusercontent.com">
       <StyledContainer maxWidth="sm">
         <StyledPaper elevation={3}>
           <StyledAvatar>
@@ -109,20 +111,10 @@ const Auth = () => {
             <GoogleLogin
               onSuccess={handleGoogleSuccess}
               onFailure={handleGoogleFailure}
-              render={(renderProps) => (
-                <GoogleButton
-                  color="primary"
-                  fullWidth
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  startIcon={<Icon />}
-                  variant="contained"
-                >
-                  Google Login
-                </GoogleButton>
-              )}
+              // render={(renderProps) => (
+              // )}
             />
-            <Grid container justifyContent="flex-end">
+            <Grid container marginTop={5} justifyContent="flex-end">
               <Grid item>
                 <Button onClick={changeMode} disableRipple>
                   {isSignUp ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
@@ -132,7 +124,6 @@ const Auth = () => {
           </SingupForm>
         </StyledPaper>
       </StyledContainer>
-    </GoogleOAuthProvider>
   );
 };
 

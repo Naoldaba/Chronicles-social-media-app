@@ -18,7 +18,7 @@ export const StyledPaper = styled(Paper)(({theme})=>({
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(2),
-    width: '50%'
+    width: '30%'
 }))
 
 export const StyledAvatar = styled(Button)(({theme})=>({
@@ -33,7 +33,7 @@ export const SingupForm = styled('form')(({theme})=>({
 }))
 
 export const GoogleButton = styled(Button)(({theme})=>({
-    // margin:"10px",
+    // width: '100%',
 }))
 
 export const StyledGrid = styled(Grid)(({theme})=>({

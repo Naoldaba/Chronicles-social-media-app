@@ -54,10 +54,8 @@ const Auth = () => {
   };
 
   const handleGoogleSuccess = async (response) => {
-    console.log("response",response)
     const token = response.credential;
     const profileInfo = jwtDecode(response.credential)
-    console.log("decoded", profileInfo);
     try {
       dispatch(AUTH({ profileInfo, token }));
       navigate('/');

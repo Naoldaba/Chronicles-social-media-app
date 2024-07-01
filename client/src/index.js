@@ -15,12 +15,12 @@ const store = configureStore({
     auth: authReducer
   }
 })
-const clientSecret = "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";
+const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <Provider store={store}>
-    <GoogleOAuthProvider clientId="745121366812-34mr2kci6sm7283bqc2hq01esjf0tbd6.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
         <App/>
     </GoogleOAuthProvider>
   </Provider>

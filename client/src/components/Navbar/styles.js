@@ -45,5 +45,5 @@ export const StyledToolbar = styled(Toolbar)(({theme})=>({
 }))
 
 export const UserName = styled(Typography)(({theme})=>({
-    color:'white'
+    color:'black'
 }))

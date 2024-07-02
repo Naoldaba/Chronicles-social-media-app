@@ -22,11 +22,11 @@ const Home = ()=>{
 
     return (
         <Grow in>
-            <MainContainer container justify='space-around' alignItems='stretch' spacing={20}>
-                <Grid item xs={12} sm={7} >
+            <MainContainer container justify='space-around' alignItems='stretch' spacing={10}>
+                <Grid item xs={12} md={7} >
                     <Posts setCurrId={setCurrId} />
                 </Grid>
-                <Grid item xs={12} sm={4} >
+                <Grid item xs={12} md={5} >
                     <Form currId={currId} setCurrId={setCurrId} />
                 </Grid>
             </MainContainer>

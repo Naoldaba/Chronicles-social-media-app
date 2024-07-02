@@ -45,7 +45,7 @@ const Navbar = () => {
                 {
                     user ? (
                         <Profile>
-                            <StyledAvatar >{user.profileInfo.name.charAt(0)}</StyledAvatar>
+                            <StyledAvatar color="black" >{user.profileInfo.name.charAt(0)}</StyledAvatar>
                             <UserName variant='h6'>{user.profileInfo.name}</UserName>
                             <Logout variant='contained' color='secondary' onClick={logout} >Logout</Logout>
                         </Profile>

@@ -38,8 +38,8 @@ const Navbar = () => {
     return (
         <StyledAppBar position='static' color="secondary">
             <BrandContainer>
-                <Typography variant='h4' align='center' color={{color: 'white'}}>Chronicles of AAU</Typography>
                 <Image src={aau} alt="chronicles of aau" height='60' />
+                <Typography style={{ fontFamily: 'Roboto' }} variant='h4' align='center' color={{color: 'black'}}>Chronicles of AAU</Typography>
             </BrandContainer>
             <StyledToolbar>
                 {

@@ -11,10 +11,11 @@ export const StyledAppBar=styled('div')(({theme})=>({
     flexWrap:'wrap',
     justifyContent: 'space-around',
     alignItems: 'center',
+    backgroundColor: 'white'
 }))
 
 export const Image=styled('img')(({theme})=>({
-    marginLeft:'15px'
+    marginRight:'15px'
 }))
 
 export const BrandContainer = styled('div')(({theme})=>({

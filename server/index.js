@@ -14,8 +14,7 @@ app.use(express.urlencoded({limit: "30mb", extended:true}));
 
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
-app.use('/', (req, res)=>{res.send("welcome")});
-
+app.get('/', (req, res)=>{res.send("welcome")});
  
 const PORT=process.env.PORT || 5000;
 

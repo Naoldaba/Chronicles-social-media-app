@@ -15,6 +15,7 @@ const store = configureStore({
     auth: authReducer
   }
 })
+
 const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,5 +26,3 @@ root.render(
     </GoogleOAuthProvider>
   </Provider>
 );
-
-

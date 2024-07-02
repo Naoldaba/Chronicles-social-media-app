@@ -10,7 +10,7 @@ export const Root = styled('div')(({ theme }) => ({
 }));
 
 export const StyledPaper = styled(Paper)(({ theme }) => ({
-  // padding: 10
+  padding: 10
 }));
 
 export const StyledForm = styled('form')({
